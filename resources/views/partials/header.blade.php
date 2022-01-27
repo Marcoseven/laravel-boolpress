@@ -15,10 +15,10 @@
             <a class="nav-link" href="#">Temi</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Plugin</a>
+            <a class="nav-link" href="#" tabindex="-1" aria-disabled="true">Plugin</a>
           </li>
            <li class="nav-item">
-            <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Blog</a>
+            <a class="nav-link" href="{{ route('posts.index') }}" tabindex="-1" aria-disabled="true">Blog</a>
           </li>
 
           <li class="nav-item dropdown">
@@ -29,13 +29,13 @@
             </ul>
           </li>
            <li class="nav-item">
-            <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Info</a>
+            <a class="nav-link" href="#" tabindex="-1" aria-disabled="true">Info</a>
           </li>
            <li class="nav-item">
-            <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Team</a>
+            <a class="nav-link" href="#" tabindex="-1" aria-disabled="true">Team</a>
           </li>
            <li class="nav-item">
-            <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Community</a>
+            <a class="nav-link" href="#" tabindex="-1" aria-disabled="true">Community</a>
           </li>
                     <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="dropdown03" data-bs-toggle="dropdown" aria-expanded="false">Traduci</a>
@@ -43,12 +43,9 @@
               <li><a class="dropdown-item" href="#">PTE status requests by Devs for italian localization: the guidelines.</a></li>
             </ul>
           </li>
-
-
         </ul>
-        <form>
-          <input class="form-control" type="text" placeholder="Search" aria-label="Search">
-        </form>
+        <button class="btn border border-primary text-white" type="submit">Scarica WordPress</button>
+        
       </div>
     </div>
   </nav>

@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,11 +15,14 @@ use Illuminate\Support\Facades\Auth;
 */
 
 Route::get('/', function () {
-    return view('guest.welcome');
+    return view('guest.home');
 })->name('home');
 
 Auth::routes();
 
+Route::resource('posts', PostController::class)->only(['index', 'show'])->parameters('posts', 'post=slug');
+
 Route::namespace('Admin')->prefix('admin')->name('admin.')->middleware('auth')->group(function(){
     Route::get('/', 'HomeController@index')->name('dashboard');
+    Route::resource('posts', PostController::class);
 });
