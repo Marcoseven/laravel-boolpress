@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
 use App\Models\Post;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
@@ -15,9 +16,9 @@ class PostController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Post $post)
+    public function index()
     {
-        $posts = Post:: paginate(10);
+        $posts = Post::paginate(10); 
         return view ('admin.posts.index', compact('posts'));
     }
 
@@ -48,8 +49,9 @@ class PostController extends Controller
         ]);
 
         $validated['slug'] = Str::slug($validated['title']);
-        Post::create($validated);
+        $validated['user_id'] = Auth::id();
 
+        // Redirect
         return redirect()->route('admin.posts.index');
     }
 
@@ -72,7 +74,11 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        return view ('admin.posts.edit', compact('post'));
+        if(Auth::id() === $post->user_id) { 
+            return view('admin.posts.edit', compact('post'));
+        } else {
+            abort(403);
+        }
     }
 
     /**
@@ -94,7 +100,6 @@ class PostController extends Controller
             'body' => ['nullable'],
         ]);
 
-        // Genera slug
         $validated['slug'] = Str::slug($validated['title']);
 
         // Salvataggio
@@ -102,7 +107,6 @@ class PostController extends Controller
 
         // Redirect
         return redirect()->route('admin.posts.index')->with('message', 'Post aggiornato');
-
     }
 
     /**
@@ -114,6 +118,11 @@ class PostController extends Controller
     public function destroy(Post $post)
     {
         $post->delete();
-        return redirect()->route('admin.posts.index')->with('message', 'Post rimosso');
+        if(Auth::id() === $post->user_id){
+            $post->delete();
+            return redirect()->route('admin.posts.index')->with('message', 'Post rimosso');
+        } else{
+            abort(403);
+        }
     }
 }

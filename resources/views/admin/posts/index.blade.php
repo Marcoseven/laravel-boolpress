@@ -3,6 +3,7 @@
 
 <h1>Posts</h1>
 <div class="container me-5">
+    <a href="{{ route('admin.posts.create') }}">Crea un post</a>
     <table class="table">
         <thead>
             <tr>
@@ -10,43 +11,59 @@
                 <th>Titolo</th>
                 <th>Sotto-titolo</th>
                 <th>Slug</th>
-                 <th>Immagine</th>
+                <th>Immagine</th>
                 <th>Testo</th>
-
             </tr>
         </thead>
         <tbody>
             @foreach ($posts as $post)
-            <tr>
-                <td scope="row">{{ $post->id }}</td>
-                <td>{{ $post->title }}</td>
-                <td>{{ $post->sub_title }}</td>
-                <td>{{ $post->slug }}</td>
-                <td><img src="{{ $post->image }}" alt="{{ $post->title }}"></td>
-                <td>{{ $post->text }}</td>
-                <td>
-                    <a href="{{ route('admin.posts.show') }}">View</a>
-                    <a href="{{ route('admin.posts.edit') }}">Edit</a>
-                    <a href="{{ route('admin.posts.delete') }}">Delete</a>
-                </td>
-            </tr>      
+                <tr>
+                    <td scope="row">{{ $post->id }}</td>
+                    <td>{{ $post->title }}</td>
+                    <td>{{ $post->sub_title }}</td>
+                    <td>{{ $post->slug }}</td>
+                    <td><img class="w-100" src="{{ $post->image }}" alt="{{ $post->title }}"></td>
+                    <td>{{ $post->text }}</td>
+                    <td class="d-flex">
+                        <a class="btn btn-primary" href="{{ route('admin.posts.show', $post->slug) }}">Vedi</a>
+                        <a class="btn btn-primary" href="{{ route('admin.posts.edit', $post->slug) }}">Modifica</a>
+                        <!-- Button trigger modal -->
+                        <button type="button" class="btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#modelId_{{ $post->slug }}">
+                        Cancella
+                        </button>
+                        
+                        <!-- Modal -->
+                        <div class="modal fade" id="modelId_{{ $post->slug }}" tabindex="-1" role="dialog" aria-labelledby="modelTitleId_{{ $post->slug }}" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">Modal title</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        Attenzione! Stai per cancellare il post
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Chiudi</button>
+                                        <button type="button" class="btn btn-primary">
+                                            <form action="{{ route('admin.posts.destroy', $post->slug) }}" method="post">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-secondary">Cancella</button>
+                                            </form>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>      
             @endforeach
         </tbody>
-    </table>
+    </table> 
     
-    <div class="row gy-5">
-        @foreach ($posts as $post)
-            <div class="col-3">
-                <div class="card text-center p-3">
-                    <img class="w-100 rounded" src="{{ $post->image }}" alt="{{ $post->title }}">
-                    <div class="card-body">
-                        <h4 class="">{{ $post->title }}</h4>
-                        <h6 class="">{{ $post->sub_title }}</h6>
-                        <a href="{{ route('posts.show', $post->slug) }}">Vedi post</a>
-                    </div>
-                </div>
-            </div>
-        @endforeach
+    <div class="my-5 d-flex justify-content-center"> 
+        {{$posts->links()}}
     </div>
 </div>
 @endsection

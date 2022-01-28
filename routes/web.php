@@ -18,7 +18,7 @@ Route::get('/', function () {
     return view('guest.home');
 })->name('home');
 
-Auth::routes();
+Auth::routes(['register' => false]);
 
 Route::resource('posts', PostController::class)->only(['index', 'show'])->parameters('posts', 'post=slug');
 
