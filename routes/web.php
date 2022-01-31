@@ -20,9 +20,13 @@ Route::get('/', function () {
 
 Auth::routes(['register' => false]);
 
-Route::resource('posts', PostController::class)->only(['index', 'show'])->parameters('posts', 'post=slug');
+Route::resource('posts', PostController::class)->only(['index', 'show'])->parameters('posts', 'post:slug');
+Route::resource('products', PostController::class)->only(['index', 'show'])->parameters('products', 'products:slug');
+
 
 Route::namespace('Admin')->prefix('admin')->name('admin.')->middleware('auth')->group(function(){
     Route::get('/', 'HomeController@index')->name('dashboard');
     Route::resource('posts', PostController::class);
+    Route::resource('products', PostController::class);
+
 });

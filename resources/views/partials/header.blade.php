@@ -9,47 +9,16 @@
       <div class="collapse navbar-collapse" id="navbarsExample03">
         <ul class="navbar-nav me-auto mb-2 mb-sm-0">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Italia</a>
+              <a class="nav-link" href="{{ route('home') }}">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Temi</a>
+              <a class="nav-link" href="{{ route('posts.index') }}">Blog</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#" tabindex="-1" aria-disabled="true">Plugin</a>
-          </li>
-           <li class="nav-item">
-            <a class="nav-link" href="{{ route('posts.index') }}" tabindex="-1" aria-disabled="true">Blog</a>
-          </li>
-
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="dropdown03" data-bs-toggle="dropdown" aria-expanded="false">Supporto</a>
-            <ul class="dropdown-menu" aria-labelledby="dropdown03">
-              <li><a class="dropdown-item" href="#">Documentazione</a></li>
-              <li><a class="dropdown-item" href="#">Forum</a></li>
-            </ul>
-          </li>
-           <li class="nav-item">
-            <a class="nav-link" href="#" tabindex="-1" aria-disabled="true">Info</a>
-          </li>
-           <li class="nav-item">
-            <a class="nav-link" href="#" tabindex="-1" aria-disabled="true">Team</a>
-          </li>
-           <li class="nav-item">
-            <a class="nav-link" href="#" tabindex="-1" aria-disabled="true">Community</a>
-          </li>
-                    <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="dropdown03" data-bs-toggle="dropdown" aria-expanded="false">Traduci</a>
-            <ul class="dropdown-menu" aria-labelledby="dropdown03">
-              <li><a class="dropdown-item" href="#">PTE status requests by Devs for italian localization: the guidelines.</a></li>
-            </ul>
+              <a class="nav-link" href="{{ route('products.index') }}">Products</a>
           </li>
         </ul>
-        <button class="btn border border-primary text-white" type="submit">Scarica WordPress</button>
-        
       </div>
     </div>
-  </nav>
-    
-
-    
+  </nav> 
 </header>

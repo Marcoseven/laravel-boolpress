@@ -6,13 +6,14 @@
     <a href="{{ route('admin.posts.create') }}">Crea un post</a>
     <table class="table">
         <thead>
-            <tr>
+            <tr class="text-center">
                 <th>ID</th>
                 <th>Titolo</th>
                 <th>Sotto-titolo</th>
                 <th>Slug</th>
                 <th>Immagine</th>
                 <th>Testo</th>
+                <th>Azioni</th>
             </tr>
         </thead>
         <tbody>
@@ -26,7 +27,8 @@
                     <td>{{ $post->text }}</td>
                     <td class="d-flex">
                         <a class="btn btn-primary" href="{{ route('admin.posts.show', $post->slug) }}">Vedi</a>
-                        <a class="btn btn-primary" href="{{ route('admin.posts.edit', $post->slug) }}">Modifica</a>
+                        <a class="btn btn-primary mx-2" href="{{ route('admin.posts.edit', $post->slug) }}">Modifica</a>
+                        
                         <!-- Button trigger modal -->
                         <button type="button" class="btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#modelId_{{ $post->slug }}">
                         Cancella
@@ -37,15 +39,14 @@
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title">Modal title</h5>
+                                        <h5 class="modal-title">Cancellazione del post: "{{$post->title}}"</h5>
                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
-                                        Attenzione! Stai per cancellare il post
+                                        Attenzione! Stai per cancellare il post. Sei sicuro?
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Chiudi</button>
-                                        <button type="button" class="btn btn-primary">
                                             <form action="{{ route('admin.posts.destroy', $post->slug) }}" method="post">
                                                 @csrf
                                                 @method('DELETE')
@@ -67,3 +68,4 @@
     </div>
 </div>
 @endsection
+

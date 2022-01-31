@@ -1,10 +1,10 @@
 @extends('layouts.admin')
 @section('content')
 
-<h1>Carica un post</h1>
+<h1>Carica un post {{$post->title}}</h1>
 @include('partials.errors')
  
-<form action="{{ route('admin.posts.update', $post->slug) }}" method="post">
+<form action="{{ route('admin.posts.update', $post->slug) }}" method="post" enctype="multipart/form-data">
     @csrf
     @method('PUT')
 
