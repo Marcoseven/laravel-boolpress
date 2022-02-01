@@ -46,6 +46,12 @@
                                 Shop
                                 </a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('contacts') }}">
+                                <span data-feather="file"></span>
+                                Contatti
+                                </a>
+                            </li>
                         </ul>
                     </div>
                 </nav>
