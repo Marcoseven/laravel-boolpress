@@ -1,8 +1,8 @@
 @extends('layouts.admin')
 @section('content')
 
-<h1>Posts</h1>
 <div class="container me-5">
+    <h1>Posts</h1>
     <a href="{{ route('admin.posts.create') }}">Crea un post</a>
     <table class="table">
         <thead>
@@ -23,7 +23,7 @@
                     <td>{{ $post->title }}</td>
                     <td>{{ $post->sub_title }}</td>
                     <td>{{ $post->slug }}</td>
-                    <td><img class="w-100" src="{{ $post->image }}" alt="{{ $post->title }}"></td>
+                    <td><img class="w-100" src="{{ asset('storage/' . $post->image) }}" alt="{{ $post->title }}"></td>
                     <td>{{ $post->text }}</td>
                     <td class="d-flex">
                         <a class="btn btn-primary" href="{{ route('admin.posts.show', $post->slug) }}">Vedi</a>

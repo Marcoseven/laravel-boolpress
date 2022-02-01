@@ -17,6 +17,7 @@ class Post extends Model
     {
         return 'slug';
     }
+
     /**
      * Get the user that owns the Post
      *
@@ -25,5 +26,15 @@ class Post extends Model
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    /**
+     * Get the category that owns the Post
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function category(): BelongsTo
+    {
+        return $this->belongsTo(Category::class);
     }
 }

@@ -5,11 +5,20 @@
     <div class="row">
         <div class="col">
             <div class="card text-center p-3">
-                <img class="w-100 rounded" src="{{ $post->image }}" alt="{{ $post->title }}">
+                <img class="w-100 rounded" src="{{ asset('storage/' . $post->image) }}" alt="{{ $post->title }}">
                 <div class="card-body">
                     <h4 class="">{{ $post->title }}</h4>
                     <h6 class="mt-3">{{ $post->sub_title }}</h6>
-                    <p>{{ $post->text }}</p>
+                    <div class="category">
+                        @if($post->category)
+                        Categoria: <a href="{{ route('categories.posts', $post->category->slug) }}">{{ $post->category->name }}</a>
+                        @else
+                        <span>Nessuna categoria</span>
+                        @endif
+                    </div>
+                    <div class="text">
+                        <p>{{ $post->text }}</p>
+                    </div>
                 </div>
             </div>
         </div> 

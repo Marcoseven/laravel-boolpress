@@ -21,16 +21,17 @@
 </head>
 <body>
     <div id="app">
-        @include('partials.navbar')
+        @include('partials.navbar') 
+
         <div class="container-fluid">
-            <div class="row d-flex">
-                <nav class="col-md-2 ml-sm-auto col-lg-2 d-none d-md-block bg-light sidebar">
+            <div class="row d-flex flex-row justify-space-between">
+                <nav class="col-md-1 ml-sm-auto col-lg-1 d-none d-md-block bg-light sidebar">
                     <div class="sidebar-sticky">
                         <ul class="nav flex-column">
                             <li class="nav-item">
                                 <a class="nav-link active" href="{{ route('admin.dashboard') }}">
                                 <span data-feather="home"></span>
-                                Dashboard <span class="sr-only">(current)</span>
+                                Dashboard
                                 </a>
                             </li>
                             <li class="nav-item">
@@ -39,11 +40,17 @@
                                 Posts
                                 </a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('admin.products.index') }}">
+                                <span data-feather="file"></span>
+                                Shop
+                                </a>
+                            </li>
                         </ul>
                     </div>
                 </nav>
 
-                <main role="main" class="col-md-10 ml-sm-auto col-lg-10 pt-3 px-4">
+                <main role="main" class="col-md-11 ml-sm-auto col-lg-11 pt-3 px-4">
                     @yield('content')
                 </main>
             </div>

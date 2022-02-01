@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
@@ -40,16 +41,21 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        $validated = $request->validate([
+        $validated = $request->validate([ 
             'title' => ['required', 'unique:posts'],
             'sub_title' => ['nullable'],
-            'image' => ['nullable'],
+            'image' => ['nullable', 'image', 'max:100'],
             'text' => ['nullable'],
             'category_id' => ['nullable', 'exists:categories,id'],
         ]);
-
+        if($request->file('image')){
+            $storage_image = $request->file('image')->store('post_images');
+            $validated['image'] = $storage_image;
+        }
+ 
         $validated['slug'] = Str::slug($validated['title']);
         $validated['user_id'] = Auth::id();
+        $post = Post::create($validated);
 
         // Redirect
         return redirect()->route('admin.posts.index');
@@ -63,7 +69,7 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        //
+        return view('admin.posts.show', compact('post'));
     }
 
     /**
@@ -90,15 +96,23 @@ class PostController extends Controller
      */
     public function update(Request $request, Post $post)
     {
-        $validated = $request->validate([
-            'title' => [
-                'required', 
-                Rule::unique('posts')->ignore($post->id), 'max:100',
-            ],
-            'sub_title' => ['nullable'],
-            'cover' => ['nullable'],
-            'body' => ['nullable'],
-        ]);
+        if(Auth::id() === $post->user_id){
+            $validated = $request->validate([
+                'title' => [
+                    'required', 
+                    Rule::unique('posts')->ignore($post->id), 'max:100',
+                ],
+                'sub_title' => ['nullable'],
+                'image' => ['nullable', 'image', 'max:100'],
+                'text' => ['nullable'],
+            ]);
+
+            if($request->file('image')){
+
+            Storage::delete($post->image);    
+            $storage_image = $request->file('image')->store('post_images');
+            $validated['image'] = $storage_image;
+        }
 
         $validated['slug'] = Str::slug($validated['title']);
 
@@ -107,6 +121,7 @@ class PostController extends Controller
 
         // Redirect
         return redirect()->route('admin.posts.index')->with('message', 'Post aggiornato');
+        }
     }
 
     /**

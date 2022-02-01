@@ -21,9 +21,28 @@
 </head>
 <body>
     <div id="app">
-        @include('partials.navbar')
-        
-        @include('partials.header')
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('home') }}">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{route('posts.index')}}">Blog</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Contacts</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{route('products.index')}}">Shop</a>
+                </li>
+            </ul>
+        </div>
+
+        @include('partials.navbar') 
+
         <main class="py-4">
             @yield('content')
         </main>

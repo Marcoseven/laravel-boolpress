@@ -6,7 +6,7 @@
         @foreach ($posts as $post)
             <div class="col-3">
                 <div class="card text-center p-3">
-                    <img class="w-100 rounded" src="{{ $post->image }}" alt="{{ $post->title }}">
+                    <img class="w-100 rounded" src="{{ asset('storage/' . $post->image) }}" alt="{{ $post->title }}">
                     <div class="card-body">
                         <h4 class="">{{ $post->title }}</h4>
                         <h6 class="">{{ $post->sub_title }}</h6>
@@ -17,4 +17,17 @@
         @endforeach
     </div>
 </div>
+
+<aside class="">
+    <div class="card">
+        <h4>Categorie</h4>
+        <ul>
+            @foreach ($categories as $category)
+                <li>
+                    <a href="{{ route('categories.posts', $category->slug) }}">{{ $category->name }}</a>
+                </li>
+            @endforeach
+        </ul>
+    </div>
+</aside>
 @endsection

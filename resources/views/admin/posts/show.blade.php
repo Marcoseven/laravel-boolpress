@@ -14,7 +14,7 @@
             </div>
         </div> 
         <div class="content mt-3">
-            <a href="{{ route('posts.index') }}">Torna indietro ai posts</a>
+            <a href="{{ route('admin.posts.index') }}">Torna indietro ai posts</a>
         </div>
     </div>
 </div>
