@@ -29,5 +29,16 @@
             @endforeach
         </ul>
     </div>
+
+    <div class="card">
+        <h4>Tags</h4>
+        <ul>
+            @foreach ($tags as $tag)
+                <li>
+                    <a href="{{ route('guest.tags.posts', $tag->slug) }}">{{ $tag->name }}</a>
+                </li>
+            @endforeach
+        </ul>
+    </div>
 </aside>
 @endsection

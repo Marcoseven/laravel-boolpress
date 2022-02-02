@@ -9,12 +9,21 @@
                 <div class="card-body">
                     <h4 class="">{{ $post->title }}</h4>
                     <h6 class="mt-3">{{ $post->sub_title }}</h6>
-                    <div class="category">
-                        @if($post->category)
-                        Categoria: <a href="{{ route('categories.posts', $post->category->slug) }}">{{ $post->category->name }}</a>
-                        @else
-                        <span>Nessuna categoria</span>
-                        @endif
+                    <div class="">
+                        <div class="category">
+                            @if($post->category)
+                            Categoria: <a href="{{ route('categories.posts', $post->category->slug) }}">{{ $post->category->name }}</a>
+                            @else
+                            <span>Nessuna categoria</span>
+                            @endif
+                        </div>
+                        <div class="tag">
+                            @if($post->tag)
+                            Categoria: <a href="{{ route('guest.tags.posts', $post->tag->slug) }}">{{ $post->tag->name }}</a>
+                            @else
+                            <span>Nessun tag</span>
+                            @endif
+                        </div>
                     </div>
                     <div class="text">
                         <p>{{ $post->text }}</p>

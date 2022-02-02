@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use App\Models\Tag;
+use App\Models\Category;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
@@ -15,7 +17,9 @@ class PostController extends Controller
     public function index()
     {
         $posts = Post::paginate(10);
-        return view ('guest.posts.index', compact('posts'));
+        $categories = Category::all();
+        $tags = Tag::all();
+        return view ('guest.posts.index', compact('posts', 'categories', 'tags'));
     }
 
 
