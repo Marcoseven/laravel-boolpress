@@ -1,9 +1,9 @@
 @extends('layouts.admin')
 @section('content')
 
-<h1>Categorie</h1>
 
 <div class="container">
+    <h1>Categorie</h1>
     <div class="row gy-2">
         <div class="col-6">
             <form action="{{ route('admin.categories.store') }}" method="post">
@@ -27,7 +27,7 @@
                         <input type="text" name="name" id="name" value="{{ $category->name }}">
                     </form>
 
-                    <form action="{{ route('admin.categories.destroy', $category->id) }}" method="post">
+                    <form action="{{ route('admin.categories.destroy', $category->id) }}" method="post" class="my-3">
                         @csrf
                         @method('DELETE')
 

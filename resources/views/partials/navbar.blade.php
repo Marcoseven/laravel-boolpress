@@ -1,8 +1,26 @@
 <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
     <div class="container">
+        <a class="nav-link " href="{{ url('/') }}">
+                {{ config('app/name', 'Boolpress') }} 
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
+            <span class="navbar-toggler-icon"></span>
+        </button>
         <div class="collapse navbar-collapse justify-content-between" id="navbarSupportedContent">
             <!-- Left Side Of Navbar -->
             <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('home') }}">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('posts.index') }}">Blog</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('products.index') }}">Shop</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('contacts') }}">Contatti</a>
+                </li>
             </ul>
 
             <!-- Right Side Of Navbar -->
@@ -24,8 +42,8 @@
                         </a>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                             <a class="nav-link" href="{{ route('home') }}">Home</a>
-                            <a class="nav-link" href="{{route('admin.posts.index')}}">Blog</a>
-                            <a class="nav-link" href="{{route('admin.products.index')}}">Shop</a>
+                            <a class="nav-link" href="{{ route('admin.posts.index') }}">Blog</a>
+                            <a class="nav-link" href="{{ route('admin.products.index') }}">Shop</a>
                             <a class="nav-link" href="{{ route('contacts') }}">Contatti</a>
                             <a class="nav-link" href="{{ route('admin.dashboard') }}">
                                 Dashboard
@@ -46,4 +64,4 @@
             </ul>
         </div>
     </div>
-</nav>
+</nav> 
