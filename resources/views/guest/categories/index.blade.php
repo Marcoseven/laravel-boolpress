@@ -11,7 +11,6 @@
 <div class="container">
     <div class="row gy-2">
         @forelse($posts as $post)
-
         <div class="col-md-4">
             <div class="card">
                 <img class="card-img-top" src="{{ $post->image }}" alt="{{ $post->title }}">

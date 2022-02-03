@@ -3,10 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Models\Category;
+use App\Models\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
@@ -39,8 +42,8 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        $validated = $request->validate([
-            'name' => ['required', 'unique:products'],
+        $validated_data = $request->validate([
+            'name' => ['required', 'unique:products', 'max:100'],
             'slug' => ['nullable'],
             'availability' => ['nullable'],
             'quantity' => ['nullable'],
@@ -48,7 +51,7 @@ class ProductController extends Controller
             'description' => ['nullable'],
         ]);
 
-        Product::create($validated);
+        Product::create($validated_data);
 
         // Redirect
         return redirect()->route('admin.products.index');
@@ -73,11 +76,14 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        if(Auth::id() === $product->id) { 
-            return view('admin.products.edit', compact('product'));
+        $categories = Category::all();
+        $tags = Tag::all();
+
+        if(Auth::id() === $product->user_id) { 
+            return view('admin.products.edit', compact('product', 'categories', 'tags'));
         } else {
             abort(403);
-        }
+        } 
     }
 
     /**
@@ -89,24 +95,28 @@ class ProductController extends Controller
      */
     public function update(Request $request, Product $product)
     {
-        $validated = $request->validate([
-            'name' => [
-                'required', 
-                Rule::unique('products')->ignore($product->id), 'max:100',
-            ],
-            'slug' => ['nullable'],
-            'availability' => ['nullable'],
-            'quantity' => ['nullable'],
-            'price' => ['nullable'],
-            'description' => ['nullable'],
-        ]);
-
-        $validated['slug'] = Str::slug($validated['name']);
-
-        $product->update($validated);
-
-        // Redirect
-        return redirect()->route('admin.products.index')->with('message', 'Prodotto aggiornato');
+        if (Auth::id() === $product->user_id) {
+            $validated_data = $request->validate([
+               'name' => [
+                   'required', 
+                   Rule::unique('products')->ignore($product->id), 'max:100',
+               ], 
+               'slug' => ['nullable'],
+               'availability' => ['nullable'],
+               'quantity' => ['nullable'],
+               'price' => ['nullable'],
+               'description' => ['nullable'],
+           ]);
+   
+           $validated_data['slug'] = Str::slug($validated_data['name']);
+   
+           $product->update($validated_data);
+   
+           // Redirect
+           return redirect()->route('admin.products.index')->with('message', 'Prodotto aggiornato');
+        } else{
+            abort(403);
+        }
     }
 
     /**
@@ -117,12 +127,12 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-        $product->delete();
         if(Auth::id() === $product->user_id){
+            Storage::delete($product->image);
             $product->delete();
             return redirect()->route('admin.products.index')->with('message', 'Prodotto rimosso');
         } else{
             abort(403);
-        }
+        } 
     }
 }

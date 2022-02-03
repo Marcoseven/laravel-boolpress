@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Product;
+use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
@@ -12,9 +12,9 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Product $product)
+    public function index()
     {
-        $products = Product::paginate(10); 
+        $products = Product::paginate(10);
         return view ('guest.products.index', compact('products'));
 
     }
@@ -27,8 +27,6 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        $products = Product::paginate(10); 
         return view ('guest.products.show', compact('product'));
-
     }
 }

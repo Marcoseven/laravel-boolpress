@@ -2,6 +2,7 @@
 @section('content')
 
 <div class="container">
+    <h1>Posts guest</h1>
     <div class="row gy-5">
         @foreach ($posts as $post)
             <div class="col-3">
@@ -25,7 +26,7 @@
             @foreach ($categories as $category)
                 <li>
                     <a href="{{ route('categories.posts', $category->slug) }}">{{ $category->name }}</a>
-                </li>
+                </li> 
             @endforeach
         </ul>
     </div>
@@ -35,7 +36,7 @@
         <ul>
             @foreach ($tags as $tag)
                 <li>
-                    <a href="{{ route('guest.tags.posts', $tag->slug) }}">{{ $tag->name }}</a>
+                    <a href="{{ route('tags.posts', $tag->slug) }}">{{ $tag->name }}</a>
                 </li>
             @endforeach
         </ul>

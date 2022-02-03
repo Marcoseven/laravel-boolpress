@@ -15,6 +15,6 @@ class CategoryController extends Controller
     public function posts(Category $category)
     {
         $posts = $category->posts()->orderBy('id')->paginate(10);
-        return view ('guest.categories.posts', compact('posts', 'category'));
+        return view ('guest.categories.index', compact('posts', 'category'));
     }
 }
