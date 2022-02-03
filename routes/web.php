@@ -17,9 +17,6 @@ use App\Models\Post;
 |
 */
 
-Route::get('/', function () {
-    return view('guest.home');
-})->name('home');
 
 Auth::routes();
 
@@ -44,5 +41,10 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->middleware('auth')->
     Route::resource('categories', CategoryController::class);
 });
 /* /routes_admin */
+
+Route::get('/{any}', function () {
+    return view('spa');
+})->name('spa')->where('any', '.*');
+
 
 
