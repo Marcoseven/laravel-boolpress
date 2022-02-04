@@ -17,6 +17,10 @@ use App\Models\Post;
 |
 */
 
+Route::get('/', function(){
+    return view ('guest.home');
+})->name('home');
+
 
 Auth::routes();
 
@@ -43,7 +47,7 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->middleware('auth')->
 /* /routes_admin */
 
 Route::get('/{any}', function () {
-    return view('spa');
+    return view('guest.spa');
 })->name('spa')->where('any', '.*');
 
 

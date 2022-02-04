@@ -39,7 +39,7 @@ class PostController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, Post $post)
     {
         $validated = $request->validate([ 
             'title' => ['required', 'unique:posts'],
@@ -49,12 +49,11 @@ class PostController extends Controller
             'category_id' => ['nullable', 'exists:categories,id'],
         ]);
         if($request->file('image')){
-            $storage_image = $request->file('image')->store('post_images');
+
+            $storage_image = Storage::put('post_images', $request->file('image'));
             $validated['image'] = $storage_image;
         }
  
-        $validated['slug'] = Str::slug($validated['title']);
-        $validated['user_id'] = Auth::id();
         $post = Post::create($validated);
 
         // Redirect
@@ -109,9 +108,9 @@ class PostController extends Controller
 
             if($request->file('image')){
 
-            Storage::delete($post->image);    
-            $storage_image = $request->file('image')->store('post_images');
-            $validated['image'] = $storage_image;
+                Storage::delete($post->image);    
+                $storage_image = $request->file('image')->save('post_images');
+                $validated['image'] = $storage_image;
         }
 
         $validated['slug'] = Str::slug($validated['title']);

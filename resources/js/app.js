@@ -13,6 +13,7 @@ Vue.use(VueRouter)
 
 const Home = Vue.component("Home", require("./pages/Home.vue").default);
 const Blog = Vue.component("Blog", require("./pages/Blog.vue").default);
+const Post = Vue.component("Post", require("./pages/Post.vue").default);
 const Shop = Vue.component("Shop",require("./pages/Shop.vue").default);
 const Contacts = Vue.component("Contacts", require("./pages/Contacts.vue").default);
 const _404 = Vue.component("404", require("./pages/404.vue").default);
@@ -29,6 +30,11 @@ const router = [
         component: Blog,
     },
     {
+        path: "/post/:id",
+        name: "post",
+        component: Post,
+    },
+    {
         path: "/shop",
         name: "shop",
         component: Shop,
@@ -43,6 +49,11 @@ const router = [
         component: _404,
     },
 ];
+
+const router = new VueRouter({
+    mode: "history",
+    router, 
+});
 
 /**
  * The following block of code may be used to automatically register your

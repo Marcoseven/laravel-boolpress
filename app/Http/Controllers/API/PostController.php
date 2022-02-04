@@ -11,10 +11,7 @@ class PostController extends Controller
 {
     public function index()
     {
-        return PostResource::collection(Post::with(['category'])-> paginate(10));
-        //return Post::with(['category'])->paginate(10); 
-        //return $posts;
-        //return PostResource::collection(Post::with(['category']))->paginate(10);
+        return PostResource::collection(Post::with(['category'])->paginate(10));
     }
 
     /**
@@ -25,7 +22,8 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        return new PostResource($post);
+        $thisPost = Post::where('id', $post->id)->with(['category'])->first();
+        return new PostResource($thisPost);
     }
 
 

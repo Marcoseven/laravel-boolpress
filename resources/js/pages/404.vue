@@ -1,17 +1,11 @@
 <template>
-  <div class="container page error ">
-      <h4 class="lead">
-          404! Pagina non trovata
-      </h4>
-  </div>
+    <div class="container">
+        <h4 class="lead">404! Pagina non trovata</h4>
+    </div>
 </template>
 
 <script>
-export default {
-
-}
+export default {};
 </script>
 
-<style>
-
-</style>
+<style></style>

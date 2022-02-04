@@ -23,7 +23,7 @@
                 </li>
             </ul>
 
-                        <!-- Right Side Of Navbar -->
+            <!-- Right Side Of Navbar -->
             <ul class="navbar-nav ml-auto">
                 <!-- Authentication Links -->
                 @guest
@@ -44,7 +44,7 @@
                             <a class="nav-link" href="{{ route('home') }}">Home</a>
                             <a class="nav-link" href="{{ route('admin.posts.index') }}">Blog</a>
                             <a class="nav-link" href="{{ route('admin.products.index') }}">Shop</a>
-                            <a class="nav-link" href="{{ route('admin.contacts') }}">Contatti</a>
+                            <a class="nav-link" href="{{ route('contacts') }}">Contatti</a>
                             <a class="nav-link" href="{{ route('admin.dashboard') }}">
                                 Dashboard
                             </a>
@@ -53,8 +53,6 @@
                                     document.getElementById('logout-form').submit();">
                                 {{ __('Logout') }}
                             </a>
-
-
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                 @csrf
                             </form>
